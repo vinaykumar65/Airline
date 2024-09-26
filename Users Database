@@ -1,0 +1,5 @@
+create database company;
+use company;
+
+create table users(id int primary key auto_increment,uname varchar(50),upwd varchar(50),uemail varchar(50),umobile varchar(20),otp varchar(255),	
+otp_expiration	timestamp);
