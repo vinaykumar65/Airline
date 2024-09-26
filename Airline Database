@@ -1,0 +1,114 @@
+CREATE DATABASE airline_reservation;
+USE airline_reservation;
+
+CREATE TABLE domestic_flights (
+    flight_id INT AUTO_INCREMENT PRIMARY KEY,
+    source_city VARCHAR(50),
+    destination_city VARCHAR(50),
+    departure_time TIME,
+    arrival_time TIME,
+    economy_fare DECIMAL(10, 2),
+    business_fare DECIMAL(10, 2),
+    seats_available INT
+);
+
+CREATE TABLE international_flights (
+    flight_id INT AUTO_INCREMENT PRIMARY KEY,
+    source_city VARCHAR(50),
+    destination_city VARCHAR(50),
+    departure_time TIME,
+    arrival_time TIME,
+    economy_fare DECIMAL(10, 2),
+    business_fare DECIMAL(10, 2),
+    seats_available INT
+);
+
+CREATE TABLE bookings (
+    booking_id INT AUTO_INCREMENT PRIMARY KEY,
+    flight_id INT,
+    passenger_name VARCHAR(100),
+    seat_class VARCHAR(10),
+    num_passengers INT,
+    booking_date DATE,
+    FOREIGN KEY (flight_id) REFERENCES domestic_flights(flight_id) ON DELETE CASCADE
+);
+
+
+INSERT INTO domestic_flights (flight_id, source_city, destination_city, departure_time, arrival_time, economy_fare, business_fare, seats_available)
+VALUES
+(1132, 'Jaipur', 'Delhi', '15:00:00', '16:30:00', 2800.00, 7000.00, 55),
+(2345, 'Delhi', 'Guwahati', '05:30:00', '09:00:00', 7500.00, 17000.00, 30),
+(3456, 'Guwahati', 'Chennai', '08:00:00', '12:00:00', 6500.00, 16000.00, 35),
+(4567, 'Chennai', 'Coimbatore', '14:30:00', '15:45:00', 2200.00, 5000.00, 65),
+(5678, 'Coimbatore', 'Bangalore', '09:00:00', '10:15:00', 2500.00, 5500.00, 60),
+(6789, 'Bangalore', 'Mumbai', '16:00:00', '18:00:00', 4000.00, 9500.00, 45),
+(7890, 'Mumbai', 'Pune', '11:30:00', '12:30:00', 1500.00, 4000.00, 70),
+(8901, 'Pune', 'Indore', '13:00:00', '14:30:00', 2000.00, 5000.00, 50),
+(9012, 'Indore', 'Patna', '07:00:00', '09:00:00', 5000.00, 12000.00, 40),
+(1023, 'Patna', 'Bhopal', '10:00:00', '12:00:00', 3500.00, 8500.00, 55),
+(2134, 'Bhopal', 'Visakhapatnam', '14:00:00', '17:00:00', 6000.00, 14000.00, 35),
+(3245, 'Visakhapatnam', 'Kochi', '18:00:00', '20:30:00', 5500.00, 13000.00, 40),
+(4356, 'Kochi', 'Mysore', '12:00:00', '13:00:00', 1800.00, 4500.00, 60),
+(5467, 'Mysore', 'Vijayawada', '09:00:00', '11:00:00', 4000.00, 9500.00, 50),
+(6578, 'Vijayawada', 'Chandigarh', '15:00:00', '18:00:00', 7000.00, 16000.00, 30),
+(7689, 'Chandigarh', 'Delhi', '10:00:00', '11:30:00', 2900.00, 7200.00, 52),
+(8790, 'Delhi', 'Mumbai', '13:00:00', '15:30:00', 5000.00, 12500.00, 33),
+(9901, 'Mumbai', 'Hyderabad', '16:00:00', '18:30:00', 4200.00, 9800.00, 60),
+(1012, 'Hyderabad', 'Bangalore', '07:30:00', '09:00:00', 2900.00, 7000.00, 45),
+(2135, 'Bangalore', 'Chennai', '11:00:00', '12:30:00', 2300.00, 5200.00, 67),
+(3246, 'Chennai', 'Kolkata', '15:00:00', '17:30:00', 5500.00, 13000.00, 40),
+(4357, 'Kolkata', 'Patna', '09:00:00', '11:00:00', 3100.00, 7500.00, 50),
+(5468, 'Patna', 'Bhopal', '12:30:00', '14:30:00', 3800.00, 8500.00, 55),
+(6579, 'Bhopal', 'Coimbatore', '07:00:00', '10:00:00', 6200.00, 13500.00, 30),
+(7680, 'Coimbatore', 'Kochi', '08:00:00', '09:30:00', 2300.00, 5200.00, 65),
+(8791, 'Kochi', 'Vijayawada', '14:00:00', '16:30:00', 4900.00, 11500.00, 40),
+(9902, 'Vijayawada', 'Indore', '11:00:00', '13:00:00', 3500.00, 8000.00, 50),
+(1024, 'Indore', 'Hyderabad', '10:30:00', '12:30:00', 4300.00, 9500.00, 45),
+(2136, 'Hyderabad', 'Mumbai', '07:00:00', '09:30:00', 3900.00, 9200.00, 55),
+(3247, 'Mumbai', 'Delhi', '16:00:00', '18:30:00', 5100.00, 12700.00, 35),
+(4358, 'Delhi', 'Jaipur', '08:00:00', '09:30:00', 2600.00, 6500.00, 60);
+
+
+INSERT INTO international_flights (flight_id, source_city, destination_city, departure_time, arrival_time, economy_fare, business_fare, seats_available)
+VALUES
+(1132, 'New York', 'London', '20:00:00', '08:00:00', 800.00, 3500.00, 200),
+(2345, 'London', 'Paris', '10:00:00', '12:00:00', 150.00, 600.00, 180),
+(3456, 'Paris', 'Tokyo', '15:00:00', '07:00:00', 1200.00, 5000.00, 150),
+(4567, 'Tokyo', 'Sydney', '09:00:00', '18:00:00', 1100.00, 4800.00, 160),
+(5678, 'Sydney', 'Los Angeles', '20:00:00', '14:00:00', 1400.00, 6000.00, 140),
+(6789, 'Los Angeles', 'New York', '16:00:00', '23:00:00', 500.00, 2200.00, 190),
+(7890, 'New York', 'Toronto', '08:00:00', '10:00:00', 200.00, 800.00, 200),
+(8901, 'Toronto', 'Mexico City', '12:00:00', '14:00:00', 300.00, 1200.00, 180),
+(9012, 'Mexico City', 'Buenos Aires', '10:00:00', '22:00:00', 800.00, 3200.00, 150),
+(1023, 'Buenos Aires', 'Sao Paulo', '11:00:00', '14:00:00', 250.00, 1000.00, 160),
+(2134, 'Sao Paulo', 'Lima', '09:00:00', '12:00:00', 300.00, 1200.00, 140),
+(3245, 'Lima', 'Madrid', '18:00:00', '10:00:00', 700.00, 2900.00, 130),
+(4356, 'Madrid', 'Berlin', '12:00:00', '15:00:00', 150.00, 650.00, 150),
+(5467, 'Berlin', 'Dubai', '09:00:00', '18:00:00', 600.00, 2500.00, 140),
+(6578, 'Dubai', 'Mumbai', '22:00:00', '03:00:00', 400.00, 1600.00, 180),
+(7689, 'Mumbai', 'Singapore', '14:00:00', '22:00:00', 500.00, 2000.00, 160),
+(8790, 'Singapore', 'Hong Kong', '11:00:00', '14:00:00', 300.00, 1200.00, 190),
+(9901, 'Hong Kong', 'Seoul', '15:00:00', '19:00:00', 400.00, 1600.00, 170),
+(1012, 'Seoul', 'Tokyo', '07:00:00', '10:00:00', 250.00, 1000.00, 180),
+(2135, 'Tokyo', 'Sydney', '21:00:00', '07:00:00', 1200.00, 4900.00, 160),
+(3246, 'Sydney', 'Los Angeles', '10:00:00', '06:00:00', 1400.00, 5800.00, 140),
+(4357, 'Los Angeles', 'New York', '13:00:00', '21:00:00', 500.00, 2300.00, 200),
+(5468, 'New York', 'London', '16:00:00', '04:00:00', 800.00, 3400.00, 190),
+(6579, 'London', 'Paris', '08:00:00', '10:00:00', 150.00, 600.00, 200),
+(7680, 'Paris', 'Tokyo', '17:00:00', '09:00:00', 1200.00, 5100.00, 150),
+(8791, 'Tokyo', 'Sydney', '19:00:00', '07:00:00', 1100.00, 4700.00, 160),
+(9902, 'Sydney', 'Mumbai', '11:00:00', '19:00:00', 1300.00, 5400.00, 140),
+(1024, 'Mumbai', 'Singapore', '09:00:00', '17:00:00', 500.00, 2100.00, 160),
+(2136, 'Singapore', 'Hong Kong', '13:00:00', '16:00:00', 300.00, 1100.00, 190),
+(3247, 'Hong Kong', 'Seoul', '06:00:00', '10:00:00', 400.00, 1500.00, 170),
+(4358, 'Seoul', 'Tokyo', '08:00:00', '11:00:00', 250.00, 950.00, 180);
+
+
+
+desc domestic_flights;
+desc international_flights;
+desc bookings;
+
+select * from domestic_flights;
+select * from international_flights;
+select * from bookings;
